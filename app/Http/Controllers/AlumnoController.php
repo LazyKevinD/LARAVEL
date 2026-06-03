@@ -52,12 +52,21 @@ class AlumnoController extends Controller
 
     public function update(Request $request, $id)
     {
-        $alumno = Alumno::find($id);
+        $request->validate([
+            'Num_Control' => 'required',
+            'Nombre' => 'required',
+            'Primer_Ap' => 'required',
+            'Fecha_Nac' => 'required',
+            'Semestre' => 'required',
+            'Carrera' => 'required',
+        ]);
+
+        $alumno = Alumno::findOrFail($id);
 
         $alumno->Num_Control = $request->Num_Control;
         $alumno->Nombre = $request->Nombre;
-        $alumno->Primer_Ap = $request->PrimerAp;
-        $alumno->Segundo_Ap = $request->SegundoAp;
+        $alumno->Primer_Ap = $request->Primer_Ap;
+        $alumno->Segundo_Ap = $request->Segundo_Ap;
         $alumno->Fecha_Nac = $request->Fecha_Nac;
         $alumno->Semestre = $request->Semestre;
         $alumno->Carrera = $request->Carrera;
